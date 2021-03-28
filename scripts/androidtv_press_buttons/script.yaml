@@ -1,0 +1,89 @@
+androidtv_press_buttons:
+  alias: Send button commands to Android TV
+  variables:
+    # default: use `input keyevent` command, slow but can be used on any Android TVs.
+    # sendevent: use `sendevent` command, faster but need to be configured. And this doesn't work on some devices (like CCwGTV)
+    method: default
+
+    BUTTONS:
+      SENDEVENT:
+        # Tested on Sony TV. If this doesn't work on your TV then update it using `androidtv.learn_sendevent` service
+        # https://www.home-assistant.io/integrations/androidtv/#androidtvlearn_sendevent-for-faster-adb-commands
+        # https://cs.android.com/android/platform/superproject/+/master:external/autotest/client/bin/input/linux_input.py;l=182
+        UP: 103
+        DOWN: 108
+        LEFT: 105
+        RIGHT: 106
+        CENTER: 353
+        MUTE: 113
+        BACK: 158
+        PLAY_PAUSE: 164
+        VOLUME_UP: 115
+        VOLUME_DOWN: 114
+        APPS: 580
+        HOME: 172
+        POWER: 116
+        RED: 398
+        GREEN: 399
+        YELLOW: 400
+        BLUE: 401
+      DEFAULT:
+        # https://github.com/JeffLIrion/python-androidtv/blob/master/androidtv/constants.py#L129
+        UP: 19
+        DOWN: 20
+        LEFT: 21
+        RIGHT: 22
+        CENTER: 23
+        MUTE: 164
+        BACK: 4
+        PLAY_PAUSE: 85
+        VOLUME_UP: 24
+        VOLUME_DOWN: 25
+        HOME: 122
+        POWER: 26
+
+  sequence:
+    - service: androidtv.adb_command
+      data_template:
+        entity_id: '{{ entity_id }}'
+        command: >
+          {%- if (buttons is string) or (buttons is integer) -%}
+            {%- set buttons = [buttons] -%}
+          {%- endif -%}
+          {%- set method = method.upper() -%}
+          {%- for tmp in buttons -%}
+            {%- if (tmp|string).startswith('SLEEP') -%}
+              {%- set seconds = tmp.split(' ')[1]|float -%}
+              {%- if method == 'DEFAULT' -%}
+                {%- set seconds = seconds - 1 -%}
+              {%- endif -%}
+              {%- if seconds > 0 -%}
+                sleep {{ seconds }};
+              {%- endif -%}
+            {%- else -%}
+              {%- if (tmp is string) or (tmp is integer) -%}
+                {%- set tmp = [tmp] -%}
+              {%- endif -%}
+              {%- if method == 'DEFAULT' -%}
+                {%- set default_ns = namespace(command="input keyevent") -%}
+              {%- endif -%}
+              {%- for button in tmp -%}
+                {%- if button is string -%}
+                  {%- set button = button.upper() -%}
+                  {%- set button_id = BUTTONS[method][button] -%}
+                {%- else -%}
+                  {%- set button_id = button -%}
+                {%- endif -%}
+                {%- if method == 'DEFAULT' -%}
+                  {%- set default_ns.command = default_ns.command ~ " " ~ button_id -%}
+                {%- else -%}
+                  sendevent /dev/input/event0 1 {{ button_id }} 1 && sendevent /dev/input/event0 1 {{ button_id }} 0;
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if method == 'DEFAULT' -%}
+                {{ default_ns.command }};
+              {%- else -%}
+                sendevent /dev/input/event0 0 0 0;
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
