@@ -1,5 +1,5 @@
 # script.androidtv_press_buttons
-Quickly send button command to Android TV devices.  
+Quickly send button commands to Android TV devices using ADB.  
 Demo: https://youtu.be/mrJS9Q_toQw  
   
   
