@@ -29,7 +29,8 @@ twitch_move_to_right_side:
             - DOWN
 
 
-# Only works when the "Skip Ads" button is visible
+# Only works on skipable ads
+# Need to wait until the "SKIP AD" button is visible
 youtube_report_ads:
   alias: Report Youtube ads
   sequence:
