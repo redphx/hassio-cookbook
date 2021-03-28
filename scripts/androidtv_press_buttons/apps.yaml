@@ -1,0 +1,75 @@
+# The "Toggle Chat" button need to be focused first
+twitch_chat_toggle:
+  alias: Toggle Twitch chat
+  sequence:
+    - service: script.androidtv_press_buttons
+      data:
+        entity_id: '{{ entity_id }}'
+        method: '{{ method }}'
+        buttons:
+          - LEFT
+          - SLEEP 0.5
+          - CENTER
+
+
+# Move to the right to focus on the "Toggle Chat" button
+twitch_move_to_right_side:
+  alias: Move to the right side on Twitch
+  sequence:
+    - service: script.androidtv_press_buttons
+      data:
+        entity_id: '{{ entity_id }}'
+        method: '{{ method }}'
+        buttons:
+          - RIGHT
+          - - RIGHT
+            - RIGHT
+            - RIGHT
+            - RIGHT
+            - DOWN
+
+
+# Only works when the "Skip Ads" button is visible
+youtube_report_ads:
+  alias: Report Youtube ads
+  sequence:
+    - service: script.androidtv_press_buttons
+      data:
+        entity_id: '{{ entity_id }}'
+        method: '{{ method }}'
+        buttons:
+          - PLAY_PAUSE
+          - - DOWN
+            - UP
+            - UP
+            - CENTER
+          - SLEEP 1
+          - - DOWN
+            - DOWN
+            - DOWN
+            - CENTER
+          - SLEEP 1
+          - - UP
+            - CENTER
+          - PLAY_PAUSE
+
+
+# Like Youtube video
+youtube_like_video:
+  alias: Like Youtube video
+  sequence:
+    - service: script.androidtv_press_buttons
+      data:
+        entity_id: '{{ entity_id }}'
+        method: '{{ method }}'
+        buttons:
+          - - UP
+            - UP
+            - RIGHT
+            - RIGHT
+            - CENTER
+            - RIGHT
+            - RIGHT
+            - CENTER
+          - SLEEP 0.5
+          - BACK
