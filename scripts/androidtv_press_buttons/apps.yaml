@@ -53,6 +53,7 @@ youtube_report_ads:
           - - UP
             - CENTER
           - PLAY_PAUSE
+          - BACK
 
 
 # Like Youtube video
