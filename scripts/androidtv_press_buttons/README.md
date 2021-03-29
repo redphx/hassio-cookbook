@@ -5,7 +5,14 @@ Demo: https://youtu.be/mrJS9Q_toQw
   
 ## Requirements
 - Android TV devices of course, like Sony TVs, Chromecast with Google TV...  
-- Setup [Android TV integration](https://www.home-assistant.io/integrations/androidtv/).
+- Setup [Android TV integration](https://www.home-assistant.io/integrations/androidtv/) with `screencap: false`.
+```yaml
+media_player:
+  - platform: androidtv
+    name: Android TV Sony
+    host: 192.168.5.120
+    screencap: false
+```
   
 ## Why do you need this?
 
