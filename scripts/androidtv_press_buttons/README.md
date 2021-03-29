@@ -77,6 +77,7 @@ youtube_report_ads:
 
 ## How to use
 
+- Copy the content of yaml files to your `scripts.yaml`
 - `entity_id`: target Android TV device
 - `method`: optional
   * `default`: use `input keyevent` command, slow but can be used on any Android TVs. This is the default value.
