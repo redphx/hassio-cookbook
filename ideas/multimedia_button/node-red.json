@@ -1,0 +1,865 @@
+[
+    {
+        "id": "94bd697c.2de688",
+        "type": "change",
+        "z": "6a77dc69.d2fb24",
+        "name": "Setup properties",
+        "rules": [
+            {
+                "t": "set",
+                "p": "button_event",
+                "pt": "msg",
+                "to": "payload.event.event",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "default",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 1680,
+        "wires": [
+            [
+                "34ec331a.b9d694"
+            ]
+        ]
+    },
+    {
+        "id": "cd109e79.efd498",
+        "type": "inject",
+        "z": "6a77dc69.d2fb24",
+        "name": "Click",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"event\":{\"id\":\"multimedia_button\",\"event\":1002}}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 1680,
+        "wires": [
+            [
+                "94bd697c.2de688"
+            ]
+        ]
+    },
+    {
+        "id": "e2c86bbb.48f678",
+        "type": "inject",
+        "z": "6a77dc69.d2fb24",
+        "name": "Hold",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"event\":{\"id\":\"multimedia_button\",\"event\":1001}}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 1800,
+        "wires": [
+            [
+                "94bd697c.2de688"
+            ]
+        ]
+    },
+    {
+        "id": "34ec331a.b9d694",
+        "type": "api-current-state",
+        "z": "6a77dc69.d2fb24",
+        "name": "Get device to control",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "override_topic": false,
+        "entity_id": "sensor.multimedia_button_device",
+        "state_type": "str",
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "blockInputOverrides": false,
+        "x": 840,
+        "y": 1680,
+        "wires": [
+            [
+                "80e33910.95368"
+            ]
+        ]
+    },
+    {
+        "id": "a1e9ece5.3fd82",
+        "type": "inject",
+        "z": "6a77dc69.d2fb24",
+        "name": "Double Click",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"event\":{\"id\":\"multimedia_button\",\"event\":1004}}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 1740,
+        "wires": [
+            [
+                "94bd697c.2de688"
+            ]
+        ]
+    },
+    {
+        "id": "ae934fd1.08c22",
+        "type": "inject",
+        "z": "6a77dc69.d2fb24",
+        "name": "Shake",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"event\":{\"id\":\"multimedia_button\",\"event\":1007}}",
+        "payloadType": "json",
+        "x": 250,
+        "y": 1860,
+        "wires": [
+            [
+                "94bd697c.2de688"
+            ]
+        ]
+    },
+    {
+        "id": "80e33910.95368",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "media_player.android_tv_sony",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "media_player.android_tv_chromecast",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 1070,
+        "y": 1680,
+        "wires": [
+            [
+                "39bda3a5.251aa4"
+            ],
+            [
+                "9703cbd.47c2338"
+            ],
+            [
+                "baf7cf7c.b75db"
+            ]
+        ]
+    },
+    {
+        "id": "39bda3a5.251aa4",
+        "type": "change",
+        "z": "6a77dc69.d2fb24",
+        "name": "Set method = sendevent",
+        "rules": [
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "sendevent",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1310,
+        "y": 1620,
+        "wires": [
+            [
+                "9703cbd.47c2338"
+            ]
+        ]
+    },
+    {
+        "id": "9703cbd.47c2338",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "name": "Which app?",
+        "property": "data.attributes.app_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "tv.twitch.android.app",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "com.google.android.youtube.tv",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1570,
+        "y": 1680,
+        "wires": [
+            [
+                "60f56851.d62a88"
+            ],
+            [
+                "be45acbb.02e118"
+            ],
+            [
+                "7acd9dce.f90544"
+            ]
+        ],
+        "outputLabels": [
+            "Twitch",
+            "Youtube",
+            "Default"
+        ]
+    },
+    {
+        "id": "baf7cf7c.b75db",
+        "type": "ha-get-entities",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "server": "20327e2.7052382",
+        "name": "Get Spotify state",
+        "rules": [
+            {
+                "property": "entity_id",
+                "logic": "is",
+                "value": "media_player.spotify_redphx",
+                "valueType": "str"
+            }
+        ],
+        "output_type": "split",
+        "output_empty_results": false,
+        "output_location_type": "msg",
+        "output_location": "payload",
+        "output_results_count": 1,
+        "x": 1330,
+        "y": 2180,
+        "wires": [
+            [
+                "9cb02f1a.d24a98"
+            ]
+        ]
+    },
+    {
+        "id": "60f56851.d62a88",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "g": "c477b34e.85d8b",
+        "name": "Multimedia Button",
+        "property": "button_event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1002",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1001",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1004",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1007",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1950,
+        "y": 1440,
+        "wires": [
+            [
+                "712ab7d2.53a33"
+            ],
+            [
+                "c5a24e63.2670f"
+            ],
+            [],
+            [
+                "a0637daa.d2468"
+            ]
+        ],
+        "outputLabels": [
+            "Click",
+            "Hold",
+            "Double Click",
+            "Shake"
+        ]
+    },
+    {
+        "id": "be45acbb.02e118",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "g": "38ca8d49.1bc9aa",
+        "name": "Multimedia Button",
+        "property": "button_event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1002",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1001",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1004",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1007",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1950,
+        "y": 1680,
+        "wires": [
+            [
+                "85871485.8bcdc"
+            ],
+            [],
+            [
+                "6d02f6ad.1b9588"
+            ],
+            [
+                "e9dd5995.f9098"
+            ]
+        ],
+        "outputLabels": [
+            "Click",
+            "Hold",
+            "Double Click",
+            "Shake"
+        ]
+    },
+    {
+        "id": "7acd9dce.f90544",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "g": "4526a78e.78805",
+        "name": "Multimedia Button",
+        "property": "button_event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1002",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1001",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1004",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1007",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1950,
+        "y": 1900,
+        "wires": [
+            [
+                "137b0e9b.d6aef9"
+            ],
+            [],
+            [],
+            []
+        ],
+        "outputLabels": [
+            "Click",
+            "Hold",
+            "Double Click",
+            "Shake"
+        ]
+    },
+    {
+        "id": "9cb02f1a.d24a98",
+        "type": "change",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Save Spotify state",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "spotify",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1550,
+        "y": 2180,
+        "wires": [
+            [
+                "165d4be2.6f3984"
+            ]
+        ]
+    },
+    {
+        "id": "712ab7d2.53a33",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "c477b34e.85d8b",
+        "name": "Toggle Twitch Chat",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.twitch_chat_toggle",
+        "data": "{\"variables\":{\"entity_id\":\"{{ payload }}\",\"method\":\"{{ method }}\"}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2230,
+        "y": 1340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c5a24e63.2670f",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "c477b34e.85d8b",
+        "name": "Mute",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.androidtv_press_buttons",
+        "data": "{\"variables\":{\"entity_id\":\"{{ payload }}\",\"method\":\"{{ method }}\",\"buttons\":[\"MUTE\"]}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2190,
+        "y": 1420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0637daa.d2468",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "c477b34e.85d8b",
+        "name": "Move to Right Side",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.twitch_move_to_right_side",
+        "data": "{\"variables\":{\"entity_id\":\"{{ payload }}\",\"method\":\"{{ method }}\"}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2230,
+        "y": 1500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85871485.8bcdc",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "38ca8d49.1bc9aa",
+        "name": "Play/Pause",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.androidtv_press_buttons",
+        "data": "{\"variables\":{\"entity_id\":\"{{ payload }}\",\"method\":\"{{ method }}\",\"buttons\":[\"PLAY_PAUSE\",\"BACK\"]}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2210,
+        "y": 1620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6d02f6ad.1b9588",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "38ca8d49.1bc9aa",
+        "name": "Like Video",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.youtube_like_video",
+        "data": "{\"variables\":{\"entity_id\":\"{{ payload }}\",\"method\":\"{{ method }}\"}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2210,
+        "y": 1680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e9dd5995.f9098",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "38ca8d49.1bc9aa",
+        "name": "Report Ads",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.youtube_report_ads",
+        "data": "{\"variables\":{\"entity_id\":\"{{ payload }}\",\"method\":\"{{ method }}\"}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2210,
+        "y": 1760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "137b0e9b.d6aef9",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "4526a78e.78805",
+        "name": "Play/Pause",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.androidtv_press_buttons",
+        "data": "{\"variables\":{\"entity_id\":\"{{ payload }}\",\"method\":\"{{ method }}\",\"buttons\":[\"PLAY_PAUSE\"]}}",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2190,
+        "y": 1880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "165d4be2.6f3984",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Multimedia Button",
+        "property": "button_event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1002",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1001",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1004",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1007",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1790,
+        "y": 2180,
+        "wires": [
+            [
+                "1a9e3bf0.a1913c"
+            ],
+            [
+                "c448c4a6.a25538"
+            ],
+            [
+                "a0c33e55.e75538"
+            ],
+            [
+                "e1257ed.577fb8"
+            ]
+        ],
+        "outputLabels": [
+            "Click",
+            "Hold",
+            "Double Click",
+            "Shake"
+        ]
+    },
+    {
+        "id": "1a9e3bf0.a1913c",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Spotify: Play/Pause",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "media_play_pause",
+        "entityId": "media_player.spotify_redphx",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": true,
+        "x": 2090,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c448c4a6.a25538",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Spotify: Play on Soundbar",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "script",
+        "service": "turn_on",
+        "entityId": "script.spotify_play_soundbar",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 2120,
+        "y": 2140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0c33e55.e75538",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Playing/Paused",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "spotify.state in [\"off\", \"idle\"]",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2080,
+        "y": 2200,
+        "wires": [
+            [
+                "e36fa72f.c2a73"
+            ]
+        ]
+    },
+    {
+        "id": "e1257ed.577fb8",
+        "type": "switch",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Playing/Paused",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "spotify.state in [\"off\", \"idle\"]",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2080,
+        "y": 2260,
+        "wires": [
+            [
+                "53ae2222.b522d4"
+            ]
+        ]
+    },
+    {
+        "id": "e36fa72f.c2a73",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Spotify: Previous track",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "media_previous_track",
+        "entityId": "media_player.spotify_redphx",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": true,
+        "x": 2340,
+        "y": 2200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53ae2222.b522d4",
+        "type": "api-call-service",
+        "z": "6a77dc69.d2fb24",
+        "g": "f14b6024.c4d0e",
+        "name": "Spotify: Next track",
+        "server": "20327e2.7052382",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "media_player",
+        "service": "media_next_track",
+        "entityId": "media_player.spotify_redphx",
+        "data": "",
+        "dataType": "json",
+        "mergecontext": "",
+        "output_location": "",
+        "output_location_type": "none",
+        "mustacheAltTags": true,
+        "x": 2330,
+        "y": 2260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20327e2.7052382",
+        "type": "server",
+        "name": "Home Assistant",
+        "addon": true
+    }
+]
