@@ -6,6 +6,7 @@ https://youtu.be/3HqkuVperA8
 
 ### My devices:
 - Aqara Wireless Mini Switch with Gyro (WXKG12LM, Zigbee). This switch supports 4 actions: click, double click, hold & shake.
+- ConBee II for connecting the switch to HA.
 - Sony TV (running Android TV) and Chromecast with Google TV.
 - Samsung HW-Q70T Soundbar with Spotify Connect support.
 - Each app on Android TV/Chromcast has different set of commands.
