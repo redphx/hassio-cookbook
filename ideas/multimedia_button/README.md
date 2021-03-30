@@ -50,5 +50,5 @@ sensor:
             {% set device = states('sensor.multimedia_button_device') %}
             {{ state_attr(device, 'app_id') }}
 ```
-2. Control flow of the switch in HA's Automation or Node-RED. Source code for Node-RED implementation is in `node-red.json` file.
+2. Control flow of the switch in HA's Automation or Node-RED. Source code for Node-RED implementation is in [`node-red.json`](node-red.json) file.
 3. Scripts to control Android TV: [script.androidtv_press_buttons](/scripts/androidtv_press_buttons)
