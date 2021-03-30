@@ -27,7 +27,7 @@ https://youtu.be/3HqkuVperA8
   - Click: Play/Pause
   - Double Click: Previous track
   - Shake: Next track
-  - Hold: Play on soundbar
+  - Hold: Play Spotify on soundbar
 
 ## Setup
 1. Create a custom sensor to detect which device to control:
