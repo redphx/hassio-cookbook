@@ -40,7 +40,6 @@ androidtv_press_buttons:
         PLAY_PAUSE: 164
         VOLUME_UP: 115
         VOLUME_DOWN: 114
-        APPS: -
         HOME: 172
         POWER: 116
         VOICE: 582
