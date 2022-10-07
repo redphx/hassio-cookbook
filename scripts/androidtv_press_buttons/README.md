@@ -4,7 +4,7 @@ Demo: https://youtu.be/mrJS9Q_toQw
   
   
 ## Requirements
-- Android TV devices of course, like Sony TVs, Chromecast with Google TV...  
+- Android TV devices of course, like Sony TVs, Nvidia Shield, Chromecast with Google TV...  
 - Setup [Android TV integration](https://www.home-assistant.io/integrations/androidtv/) with `screencap: false`.
 ```yaml
 media_player:
@@ -49,7 +49,7 @@ youtube_report_ads:
     - service: script.android_tv_press_buttons
       data:
         entity_id: media_player.android_tv_living_room
-        method: sendevent
+        method: sony
         buttons:
           - PLAY_PAUSE
 
@@ -81,8 +81,9 @@ youtube_report_ads:
 - `entity_id`: target Android TV device
 - `method`: optional
   * `default`: use `input keyevent` command, slow but can be used on any Android TVs. This is the default value.
-  * `sendevent`: use `sendevent` command, faster but need to be configured. And this doesn't work on some devices like CCwGTV ("Permission denined" error).
-  * It's recommended to use `sendevent` if your device supports it.
+  * `sony`: use `sendevent` command for Sony TV
+  * `shield`: use `sendevent`command for Nvidia Shield.
+  * `sendevent` commands are faster, but may need to be configured, and do not work on some devices like CCwGTV ("Permission denined" error). It's recommended to use `sendevent` codes if your device supports it.
 ---
 
 - Press one button
