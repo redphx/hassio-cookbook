@@ -46,7 +46,7 @@ This is my solution: fast, simple, and easy to use.
 youtube_report_ads:
   alias: Report Youtube ads
   sequence:
-    - service: script.android_tv_press_buttons
+    - service: script.androidtv_press_buttons
       data:
         entity_id: media_player.android_tv_living_room
         method: sendevent
