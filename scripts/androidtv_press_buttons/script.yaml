@@ -1,4 +1,4 @@
-android_tv_press_buttons:
+androidtv_press_buttons:
   alias: Send button commands to Android TV
   variables:
     # default: use `input keyevent` command, slow but can be used on any Android TVs.
